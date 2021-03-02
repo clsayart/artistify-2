@@ -22,10 +22,17 @@ router.get("/", async (req, res, next) => {
 router.get("/create", async (req, res, next) => {
   const artists = await ArtistModel.find();
   const labels = await LabelModel.find();
+  
   res.render("dashboard/albumCreate", { artists, labels });
 });
 
 // GET - update one album (form)
+router.get("/update/:id", async (req, res, next) => {
+  const artists = await ArtistModel.find();
+  const labels = await LabelModel.find();
+  
+  res.render("dashboard/albumUpdate", { artists, labels });
+});
 
 // GET - delete one album
 
@@ -44,5 +51,10 @@ router.post("/", uploader.single("cover"), async (req, res, next) => {
 });
 
 // POST - update one album
+
+router.post("/album/update",uploader.single("cover"), async (req, res, next) =>{
+  // await AlbumModel.findByIdAndUpdate(req.param.id)
+  console.log(req.param.id)
+} )
 
 module.exports = router;
